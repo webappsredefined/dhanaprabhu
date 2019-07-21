@@ -1,6 +1,8 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import Navbar from "./components/layout/Navbar";
 import HomePage from "./components/layout/HomePage";
 import ShopChicken from "./components/shop/ShopChicken";
 import ShopMutton from "./components/shop/ShopMutton";
@@ -12,6 +14,7 @@ function App() {
   return (
     <div>
       <Router>
+        <Navbar />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/shop/chicken" component={ShopChicken} />
