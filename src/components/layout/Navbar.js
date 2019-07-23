@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { auth } from "../../firebase/firebase.utils";
+
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
 import "../../styles/navbar.scss";
 
-const Navbar = () => {
+const Navbar = ({ currentUser }) => {
   return (
     <div className="navbar">
       <Link className="logo-container" to="/">
@@ -24,6 +26,17 @@ const Navbar = () => {
           {" "}
           CART{" "}
         </Link>
+        {currentUser ? (
+          <div className="option" onClick={() => auth.signOut()}>
+            {" "}
+            Logout{" "}
+          </div>
+        ) : (
+          <Link className="option" to="/loginandregister">
+            {" "}
+            LOGIN & REGISTER{" "}
+          </Link>
+        )}
       </div>
     </div>
   );
