@@ -11,7 +11,7 @@ import ShopFish from "./components/shop/ShopFish";
 import ShopSeafood from "./components/shop/ShopSeafood";
 import ShopBestsellers from "./components/shop/ShopBestsellers";
 
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 class App extends Component {
   constructor() {
@@ -24,11 +24,25 @@ class App extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({
-        currentUser: user
-      });
-      console.log(user);
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      console.log(userAuth);
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+        // console.log(userRef); Contains id of user to get snapShot of document id and data later
+        userRef.onSnapshot(snapShot => {
+          // console.log(snapShot); // Contains id of document
+          // console.log(snapShot.data()); // Contains all user data
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+          });
+          console.log(this.state);
+        });
+      } else {
+        this.setState({ currentUser: userAuth });
+      }
     });
   }
 
