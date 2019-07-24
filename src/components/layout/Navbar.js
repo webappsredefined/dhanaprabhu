@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { auth } from "../../firebase/firebase.utils";
 
@@ -8,6 +9,7 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import "../../styles/navbar.scss";
 
 const Navbar = ({ currentUser }) => {
+  // console.log(currentUser); // To check whether user is logged in or not
   return (
     <div className="navbar">
       <Link className="logo-container" to="/">
@@ -42,4 +44,8 @@ const Navbar = ({ currentUser }) => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+});
+
+export default connect(mapStateToProps)(Navbar);
