@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
 import { connect } from "react-redux";
 
 import Navbar from "./components/layout/Navbar";
@@ -46,6 +51,8 @@ class App extends Component {
   }
 
   render() {
+    const { currentUser } = this.props;
+    console.log(currentUser);
     return (
       <div>
         <Router>
@@ -55,7 +62,9 @@ class App extends Component {
             <Route
               exact
               path="/loginandregister"
-              component={LoginAndRegister}
+              render={() =>
+                currentUser ? <Redirect to="/" /> : <LoginAndRegister />
+              }
             />
             <Route exact path="/shop/chicken" component={ShopChicken} />
             <Route exact path="/shop/mutton" component={ShopMutton} />
@@ -69,11 +78,15 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+});
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);
