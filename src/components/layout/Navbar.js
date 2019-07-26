@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { auth } from "../../firebase/firebase.utils";
+import CartIcon from "../cart/CartIcon";
+import CartDropdown from "../cart/CartDropdown";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
 import "../../styles/navbar.scss";
 
-const Navbar = ({ currentUser }) => {
+const Navbar = ({ currentUser, hidden }) => {
   // console.log(currentUser); // To check whether user is logged in or not
   return (
     <div className="navbar">
@@ -24,10 +26,6 @@ const Navbar = ({ currentUser }) => {
           {" "}
           CONTACT{" "}
         </Link>
-        <Link className="option" to="/cart">
-          {" "}
-          CART{" "}
-        </Link>
         {currentUser ? (
           <div className="option" onClick={() => auth.signOut()}>
             {" "}
@@ -39,13 +37,16 @@ const Navbar = ({ currentUser }) => {
             LOGIN & REGISTER{" "}
           </Link>
         )}
+        <CartIcon />
       </div>
+      {hidden ? null : <CartDropdown />}
     </div>
   );
 };
 
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+  currentUser,
+  hidden
 });
 
 export default connect(mapStateToProps)(Navbar);
