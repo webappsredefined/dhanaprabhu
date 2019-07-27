@@ -2,7 +2,7 @@ import React from "react";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectCollections } from "../../redux/selectors/shopSelector";
+import { selectCollections } from "../../redux/selectors/shopSelectors";
 
 import CollectionPreview from "./CollectionPreview";
 

@@ -66,7 +66,7 @@ class App extends Component {
                 currentUser ? <Redirect to="/" /> : <LoginAndRegister />
               }
             />
-            <Route exact path="/shop" component={ShopBestsellers} />
+            <Route path="/shop" component={ShopBestsellers} />
             <Route exact path="/checkout" component={CheckoutPage} />
           </Switch>
         </Router>
