@@ -21,7 +21,7 @@ const Navbar = ({ currentUser, hidden }) => {
         <Logo className="logo" />
       </Link>
       <div className="options">
-        <Link className="option" to="/shop/bestsellers">
+        <Link className="option" to="/shop">
           {" "}
           BESTSELLERS{" "}
         </Link>

@@ -26,11 +26,11 @@ const INITIAL_STATE = {
       linkUrl: "shop/seafood"
     },
     {
-      title: "Bestsellers",
+      title: "Specials",
       imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
       size: "large",
       id: 5,
-      linkUrl: "shop/bestsellers"
+      linkUrl: "shop/specials"
     }
   ]
 };

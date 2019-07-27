@@ -12,10 +12,6 @@ import { createStructuredSelector } from "reselect";
 import Navbar from "./components/layout/Navbar";
 import LoginAndRegister from "./components/auth/LoginAndRegister";
 import HomePage from "./components/layout/HomePage";
-import ShopChicken from "./components/shop/ShopChicken";
-import ShopMutton from "./components/shop/ShopMutton";
-import ShopFish from "./components/shop/ShopFish";
-import ShopSeafood from "./components/shop/ShopSeafood";
 import ShopBestsellers from "./components/shop/ShopBestsellers";
 import CheckoutPage from "./components/layout/CheckoutPage";
 
@@ -70,11 +66,7 @@ class App extends Component {
                 currentUser ? <Redirect to="/" /> : <LoginAndRegister />
               }
             />
-            <Route exact path="/shop/chicken" component={ShopChicken} />
-            <Route exact path="/shop/mutton" component={ShopMutton} />
-            <Route exact path="/shop/fish" component={ShopFish} />
-            <Route exact path="/shop/seafood" component={ShopSeafood} />
-            <Route exact path="/shop/bestsellers" component={ShopBestsellers} />
+            <Route exact path="/shop" component={ShopBestsellers} />
             <Route exact path="/checkout" component={CheckoutPage} />
           </Switch>
         </Router>
